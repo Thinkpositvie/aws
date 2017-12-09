@@ -1,0 +1,4 @@
+aws ec2 create-security-group --group-name my-own --description "my own security "
+
+An error occurred (InvalidGroup.Duplicate) when calling the CreateSecurityGroup operation: The security group 'my-own' already exists for VPC 'vpc-56c7792f'
+

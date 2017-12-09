@@ -1,0 +1,7 @@
+RDP 3389
+
+ssh 22
+
+aws ec2 describe-instances --instance-id 
+
+

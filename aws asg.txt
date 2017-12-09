@@ -1,0 +1,11 @@
+
+aws ec2 create-image --instance-id i-08d45c581bf1da175 --name "HTTPDAMI" --description "for httpd appl"
+
+ssh -i "shell.pem" root@ec2-34-230-3-122.compute-1.amazonaws.com
+
+
+TO create image from instance is called AMI (hardening image or golden AMI) --> bootable copy
+
+To backup the volume is called snapshot --> it is not a boot-table copy
+
+S

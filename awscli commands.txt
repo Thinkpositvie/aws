@@ -1,0 +1,168 @@
+aws cli commands:
+================
+debian family:
+==============
+apt-get install python
+
+apt-get install pip -y
+
+
+pip install awscli
+
+aws configure:
+
+aws access id [None]:
+
+aws access secret key id [None]:
+
+aws region name [None]:
+
+Defualt output format [name]:
+
+
+Redhat family:
+=============
+
+yum install -y pip
+
+yum install python -y 
+
+pip install awscli
+
+aws configure:
+
+aws access id [None]:
+
+aws access secret key id [None]:
+
+aws region name [None]:
+
+Defualt output format [name]:
+
+
+
+===========================================================================================================================================================================
+
+aws cli for ec2:
+===============
+
+aws ec2 describe-instances
+
+aws ec2 describe-instances --output text
+
+aws ec2 describe-instances --output table
+
+aws ec2 describe-instances --instance-id << i-********************** >>
+
+aws ec2 run-instances --image-id << >> --count << >> --instance-type << >> --key-name << >>> --subnet-id << >> --secutrity-group-name << >>
+
+aws ec2 start-instaces --instance-id << >>
+
+aws ec2 stop-instaces --instance-id << >>
+
+aws ec2 terminate-instaces --instance-id << >>
+
+aws ec2 create-tags --resources << instances-id >> --tags Key=<< "Name" >>,Value=<< "name of the instances">>  -->( Note: double quotes are optional )
+
+
+
+TO creat aMi:
+
+aws ec2 create-image --instance-id < >  --name << ami name >> --description << >>
+
+============================================================================================================================================================================
+
+aws cli for security-group:
+===========================
+
+aws ec2 create-security-group --group-name << >> --description << >>
+
+aws ec2 describe-security-groups --output table
+
+aws ec2 create-security-groups --group-id << >> --description << >>
+
+To delete security group:
+========================
+
+aws ec2 delete-security-group --group-name << >> --description << >>
+
+
+task 2:
+
+To set inbound and outbound rules:
+=================================
+
+aws ec2 authorize-security-group-ingress --group-name << >> --protocol << tcp >> --port << >> --cidr << >> 
+
+
+==========================================================================================================================================================================
+
+
+aws cli for s3 bucket:
+======================
+
+aws s3 mb s3://<<bucket name >>
+
+aws s3 ls s3://<< bucket name>> 
+
+aws s3 ls
+
+aws s3 cp << file name >> s3://bucketname
+
+aws s3 sync   s3://bucketname 
+
+aws s3 cp << file/directories >>  s3://bucketname
+
+aws s3 rb s3://backetname
+
+aws s3 rm s3://bucketname/file  --> To delete a file from s3 bucket
+
+aws s3 cp << file >> s3://bucketname/subdirectory/
+ 
+aws s3 cp << file >> s3://bucketname/subdirectory/<< new file name >>
+
+aws s3 cp << file >> s3://bucketname/subdirectory/
+
+
+
+===========================================================================================================================================================================
+ 
+aws cli for IAM:
+===============
+
+aws create-user --user-name << name of the user >>
+
+aws create-group --group-name << name of the group >>
+
+aws add-user-to-group --user-name << user name >>  --group-name <<  groupname >>
+
+aws create-login-profile --user-name << user name >> --password << enter the password>>
+
+
+Delete a user, group, policies:
+==============================
+
+
+Delete IAM USER:
+===============
+
+aws iam delete-user --user-name << username >>
+
+aws iam delete-login-profile  --user-name << user name >>
+
+
+Note: 
+ First off all to detach group and policies,and delete the  login profile
+
+Delete IAM Group:
+=================
+
+aws iam delete-user --group-name << group name >>
+
+aws iam delete-login-profile  --user-name << user name >>
+
+
+
+Note: 
+ First off all to detach user and policies
+

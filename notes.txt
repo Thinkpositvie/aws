@@ -1,0 +1,9 @@
+Create New IAM Users and Groups
+
+This section describes how to create a new IAM group and a new IAM user and then add the user to the group.
+
+To create an IAM group and add a new IAM user to it
+
+First, use the create-group command to create the group.
+
+

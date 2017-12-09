@@ -1,0 +1,207 @@
+Real time scenario's:
+====================
+
+To launch instance through cli:
+===============================
+
+
+ aws ec2 run-instances --image-id  ami-aa2ea6d0 --count 1 --instance-type t2.micro --key-name shell --security-group-id sg-8d3375f8 --subnet-id subnet-94de60b
+
+
+aws ec2 describe-instances --instance-id  i-098efe1c1104358b7 --output table ----> TO stop the instance by using this command
+
+
+
+aws ec2 stop-instances --instance-id   i-098efe1c1104358b7  ----> TO stop the instance
+
+To create a instance with ec2 classic :
+======================================
+
+
+aws ec2 run-instances --image-id << ami-xxxxxxxx >> --count << 1 >> --instance-type << t1.micro >> --key-name << MyKeyPair >>  --security-groups << my-sg >>
+
+
+
+To create a instance with vpc :
+===============================
+ 
+ aws ec2 run-instances --image-id
+          << ami-xxxxxxxx >> --count << 1 >> --instance-type <<  t2.micro  >> --key-name << MyKeyPair >> --security-group-ids << sg-xxxxxxxx  >> --subnet-id << subnet-xxxxxxxx >>
+
+
+
+To create a tags on instaces:
+============================
+
+if we want to create a instance name through cli  byusing bellow command:
+
+syntax:
+======
+ 
+aws ec2 create-tags --resources << instance id >> --tags Key=<< Name >>,Value=<< name of instaces >>
+
+
+example:
+=======
+
+
+aws ec2 create-tags --resources i-0e91a308cd316626f --tags Key=Name,Value=awsubuntu
+
+
+To start the ec2 instances:
+==========================
+
+step 1:
+======
+
+if we want to start the stopped ec2 instace by bellow command:
+
+
+ aws ec2 start-instances --instance-id i-0e91a308cd316626f
+
+step 2:
+======
+
+if we want to  stop the ec2 instace by bellow command:
+
+
+aws ec2 stop-instances --instance-id << i-******* >>
+
+
+step 3:
+======
+
+if we want to terminate the ec2 instance by using bellow command
+
+
+aws ec2 terminate-instances --instance-id << id of instanes >>
+ 
+example:
+=======
+
+ aws ec2 terminate-instances --instance-id i-0e91a308cd316626f
+
+
+====================================================================================================================================================================
+
+
+aws cli IAM:
+===========
+
+step 1: To create a new user in aws IAM
+======
+
+aws iam create-user --user-name << username >>
+
+example:
+=======
+
+aws iam create-user --user-name nag
+
+step 2: now we create a group 
+======
+
+
+aws iam create-group --group-name << name of the group >>
+
+example:
+=======
+
+aws iam create-group --group-name nag
+
+
+
+step 3: now we add the user to a group
+======
+
+
+Finally, use the add-user-to-group command to add the user to the group.
+
+
+syntax:
+======
+
+aws iam add-user-to-group --user-name << username >> --group-name << groupname >>
+
+
+example:
+=======
+
+aws iam add-user-to-group --user-name nag --group-name nag
+
+
+step 4:
+
+now we create a password for iam user :
+
+syntax:
+======
+
+aws iam create-login-profile --user-name << name of the user >>  --password << enter the password >>
+
+
+example:
+========
+
+aws iam create-login-profile --user-name nag --password 1741049991Face
+{
+    "LoginProfile": {
+        "UserName": "nag",
+        "CreateDate": "2017-12-07T05:53:41.144Z",
+        "PasswordResetRequired": false
+    }
+}
+
+
+
+task 2:
+
+
+now we remove the iam group:
+
+aws iam delete-group --group-name nag   --> ( first off all we detach the user then we remove the user )                                                                                                          
+
+
+An error occurred (DeleteConflict) when calling the DeleteGroup operation: Cannot delete entity, must remove users from group first.
+
+step 1: now remove the user from the group
+
+>> aws iam remove-user-from-group --user-name << user name >> --group-name << group name  >>
+
+example:
+========
+
+aws iam remove-user-from-group --user-name nag --group-name nag
+
+
+step 2 :
+======
+
+ aws iam delete-group --group-name nag  --> now first detach polibies
+
+
+
+An error occurred (DeleteConflict) when calling the DeleteGroup operation: Cannot delete entity, must detach all policies first.
+
+
+aws iam delete-group --group-name nag ----> TO delete the aws iam group
+
+
+task 3:
+======
+
+step 1: now we delete the iam user
+======
+
+aws iam delete-user --user-name << NAME OF THE USER >>
+
+An error occurred (DeleteConflict) when calling the DeleteUser operation: Cannot delete entity, must delete login profile first.
+An error occurred (DeleteConflict) when calling the DeleteUser operation: Cannot delete entity, must delete login profile first.
+
+
+
+ aws iam delete-login-profile --user-name nag
+
+ aws iam delete-user --user-name nag
+
+ 

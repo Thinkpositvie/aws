@@ -1,0 +1,146 @@
+aws pracice history;
+===================
+
+
+ 1  clear
+    2  aws configure
+    3  clear
+    4  aws s3 ls
+    5  aws s3 mb s3://nagendra517
+    6  aws s3 ls
+    7  yum install -y git
+    8  clear
+    9  touch nagendra
+   10  ls
+   11  mkdir nage
+   12  xcd nage
+   13  cd nage
+   14  mkdir n
+   15  ls
+   16  touch nagenf
+   17  ls
+   18  aws s3 ls
+   19  aws s3 ls s3://nagendra517
+   20  ls
+   21  cd nge
+   22  cd nage
+   23  aws s3 cp . s3://nagendra517
+   24  ls
+   25  aws s3 ls s3://nagendra517
+   26  aws s3 s3://nagendra517
+   27  aws s3 ls
+   28  touch ma.war
+   29  aws s3 cp ma.war s3://nagendra517
+   30  aws s3 ls s3://nagendra517
+   31  aws s3 cp nagendra  s3://nagendra517
+   32  ls
+   33  aws s3 cp n s3://nagendra517
+   34  aws s3 cp -r n s3://nagendra517
+   35  aws s3  sync n s3://nagendra517
+   36  aws s3 ls s3://nagendra517
+   37  aws s3 rm s3://nagendra517
+   38  aws s3 ls
+   39  aws s3 ls s3://nagendra517
+   40  aws s3 ls s3://nagendra517/ma.wr --recursive
+   41  aws s3 ls s3://nagendra517
+   42  aws s3 rm s3://nagendra517/ma.wr
+   43  aws s3 ls s3://nagendra517
+   44  aws s3 ls
+   45  aws s3 ls --recursive
+   46  aws s3 ls s3://nagendra517
+   47  aws s3 rm s3://nagendra517/ma.wr --recursive
+   48  aws s3 ls s3://nagendra517
+   49  aws s3 rm s3://nagendra517/ma.war
+   50  aws s3 ls s3://nagendra517
+   51  aws s3 rm s3://nagendra517/ma.war
+   52  aws s3 ls s3://nagendra517
+   53  aws s3 rb s3://nagendra517
+   54  aws s3 ls
+   55  clear
+   56  aws ec2 describe-key
+   57  aws ec2 describe-key-pairs
+   58  aws ec2 describe-key-pairs --output text
+   59  clear
+   60  aws ec2 describe-security-group --output text
+   61  aws ec2 describe-security-groups --output text
+   62  clear
+   63  aws ec2 create security-group --group-name my-own --description "my own security "
+   64  clear
+   65  aws ec2 create-security-group --group-name my-own --description "my own security "
+   66  aws ec2 describe security-groups
+   67  clear
+   68  aws ec2 describe-security-groups
+   69  aws ec2 describe-security-groups --output table
+   70  aws ec2 create-security-group --group-name my-own --description "my own security "
+   71  clear
+   72  aws describe-security-groups -group-ids sg-8d3375f8
+   73  aws describe-security-groups --group-ids sg-8d3375f8
+   74  aws describe-security-groups --group-id sg-8d3375f8
+   75  aws ec2 describe-security-groups --group-id sg-8d3375f8
+   76  aws ec2 describe-security-groups --group-ids sg-8d3375f8
+   77  aws ec2 describe-security-groups --group-ids sg-8d3375f8 --output text
+   78  aws ec2 describe-security-groups
+   79  aws ec2 describe-security-groups  --output text
+   80  aws ec2 describe-security-groups  --output table
+   81  clear
+   82  aws authorize-security-group-ingress --group-anme positive --protocol tcp --port 8080 --cidr 0.0.0.0/0
+   83  aws vpc authorize-security-group-ingress --group-anme positive --protocol tcp --port 8080 --cidr 0.0.0.0/0
+   84  aws ec2  authorize-security-group-ingress --group-anme positive --protocol tcp --port 8080 --cidr 0.0.0.0/0
+   85  aws ec2  authorize-security-group-ingress --group-name positive --protocol tcp --port 8080 --cidr 0.0.0.0/0
+   86  aws ec2 describe-security-groups --group-name positive
+   87  aws ec2 describe-security-groups --group-name positive --output table
+   88  aws ec2 describe-security-groups --group-name positive --output table |grep 8080
+   89  clear
+   90  history
+   91  init 0
+   92  clear
+   93  aws configure
+   94  aws ec2 run-instance --image-id  ami-aa2ea6d0 --count 1 --instance-type t2.micro --kye-name shell --security-group-id sg-8d3375f8 --subnet-id subnet-94de60b8
+   95  aws ec2 run-instances --image-id  ami-aa2ea6d0 --count 1 --instance-type t2.micro --kye-name shell --security-group-id sg-8d3375f8 --subnet-id subnet-94de60b8
+   96  aws ec2 run-instances --image-id  ami-aa2ea6d0 --count 1 --instance-type t2.micro --key-name shell --security-group-id sg-8d3375f8 --subnet-id subnet-94de60b
+   97  aws ec2 descrobe-instances --output table
+   98  aws ec2 describe-instances --output table
+   99  aws ec2 describe-instances --output table | grep -i i
+  100  aws ec2 describe-instances --output text | grep -i i
+  101  aws ec2 describe-instances --instance-id  i-098efe1c1104358b7
+  102  aws ec2 describe-instances --instance-id  i-098efe1c1104358b7 --output text
+  103  aws ec2 stop-instances --instance-id   i-098efe1c1104358b7
+  104  history
+  105  cleat
+  106  clear
+  107  aws ec2 describe-instances  | grep -i state
+  108  aws ec2 describe-instances  | grep -i state=running
+  109  aws ec2 describe-instances
+  110  --block-device-mappings "[{\"DeviceName\":\"/dev/sdf\",\"Ebs\":{\"VolumeSize\":2,\"DeleteOnTermination\":false}}]"
+  111  aws ec2 --block-device-mappings "[{\"DeviceName\":\"/dev/sdf\",\"Ebs\":{\"VolumeSize\":2,\"DeleteOnTermination\":false}}]"
+  112  aws help
+  113  aws ec2 create-tags --resources i-0e91a308cd316626f --tags key=Name value=awsubuntu
+  114  aws ec2 create-tags --resources i-0e91a308cd316626f --tags Key=Name Value=awsubuntu
+  115  aws ec2 create-tags --resources i-0e91a308cd316626f --tags Key=Name ,Value=awsubuntu
+  116  aws ec2 create-tags --resources i-0e91a308cd316626f --tags Key=Name,Value=awsubuntu
+  117  clear
+  118*
+  119  aws ec2 stop-instances --instance-id i-0e91a308cd316626f | grep -i state
+  120* aws ec2 start-instances --instance-id i-0e91a308cd316626f
+  121  aws ec2 terminate-instances --instance-id i-0e91a308cd316626f
+  122  aws autoscaling create-auto-scaling-group help
+  123  aws ec2 delete-security-groups --group-name myownaws autoscaling create-auto-scaling-group help
+  124  aws ec2 delete-security-group --group-name my-own
+  125  aws iam crate-user --user-name nag
+  126  aws iam create-user --user-name nag
+  127  aws iam create-group --group-name nag
+  128  aws iam add-user-to-group --user-name nag --group-name nag
+  129  aws iam get-group --group-name nag
+  130  aws iam create-login-profile --user-name nag --password 1741049991Face
+  131  aws iam delete-group --group-name nag
+  132  aws iam remove-user-to-group --user-name nag --group-name nag
+  133  aws iam remove-user-from-group --user-name nag --group-name nag
+  134  aws iam delete-group --group-name nag
+  135  aws iam delete-user --user-name nag
+  136  aws iam delete-login-profile --user-name nag --password 1741049991Face
+  137  aws iam delete-login-profile --user-name nag --password
+  138  aws iam delete-login-profile --user-name nag
+  139  aws iam delete-user --user-name nag
+  140  clear
+  141  history
+

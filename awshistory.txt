@@ -1,0 +1,151 @@
+Using username "ec2-user".
+Authenticating with public key "imported-openssh-key"
+Last login: Sun Dec  3 11:10:10 2017 from 103.42.87.179
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-ami/2017.09-release-notes/
+-bash: id: command not found
+-bash: id: command not found
+-bash: id: command not found
+/usr/libexec/grepconf.sh: line 5: grep: command not found
+-bash: tty: command not found
+[ec2-user@ip-172-31-70-25 ~]$ aws configure
+-bash: aws: command not found
+[ec2-user@ip-172-31-70-25 ~]$ sudo aws configure
+-bash: sudo: command not found
+[ec2-user@ip-172-31-70-25 ~]$ sudo -i
+-bash: sudo: command not found
+[ec2-user@ip-172-31-70-25 ~]$  PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
+[ec2-user@ip-172-31-70-25 ~]$ sudo -i
+[root@ip-172-31-70-25 ~]# aws configure
+AWS Access Key ID [None]: AKIAJXFSRRGEXVBIOG2Q
+AWS Secret Access Key [None]: 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
+Default region name [None]: us-east-1
+Default output format [None]: json
+[root@ip-172-31-70-25 ~]# aws ec2 describe-regions
+{
+    "Regions": [
+        {
+            "Endpoint": "ec2.ap-south-1.amazonaws.com",
+            "RegionName": "ap-south-1"
+        },
+        {
+            "Endpoint": "ec2.eu-west-2.amazonaws.com",
+            "RegionName": "eu-west-2"
+        },
+        {
+            "Endpoint": "ec2.eu-west-1.amazonaws.com",
+            "RegionName": "eu-west-1"
+        },
+        {
+            "Endpoint": "ec2.ap-northeast-2.amazonaws.com",
+            "RegionName": "ap-northeast-2"
+        },
+        {
+            "Endpoint": "ec2.ap-northeast-1.amazonaws.com",
+            "RegionName": "ap-northeast-1"
+        },
+        {
+            "Endpoint": "ec2.sa-east-1.amazonaws.com",
+            "RegionName": "sa-east-1"
+        },
+        {
+            "Endpoint": "ec2.ca-central-1.amazonaws.com",
+            "RegionName": "ca-central-1"
+        },
+        {
+            "Endpoint": "ec2.ap-southeast-1.amazonaws.com",
+            "RegionName": "ap-southeast-1"
+        },
+        {
+            "Endpoint": "ec2.ap-southeast-2.amazonaws.com",
+            "RegionName": "ap-southeast-2"
+        },
+        {
+            "Endpoint": "ec2.eu-central-1.amazonaws.com",
+            "RegionName": "eu-central-1"
+        },
+        {
+            "Endpoint": "ec2.us-east-1.amazonaws.com",
+            "RegionName": "us-east-1"
+        },
+        {
+            "Endpoint": "ec2.us-east-2.amazonaws.com",
+            "RegionName": "us-east-2"
+        },
+        {
+            "Endpoint": "ec2.us-west-1.amazonaws.com",
+            "RegionName": "us-west-1"
+        },
+        {
+            "Endpoint": "ec2.us-west-2.amazonaws.com",
+            "RegionName": "us-west-2"
+        }
+    ]
+}
+[root@ip-172-31-70-25 ~]# aws ec2 describe-regions --output table
+----------------------------------------------------------
+|                     DescribeRegions                    |
++--------------------------------------------------------+
+||                        Regions                       ||
+|+-----------------------------------+------------------+|
+||             Endpoint              |   RegionName     ||
+|+-----------------------------------+------------------+|
+||  ec2.ap-south-1.amazonaws.com     |  ap-south-1      ||
+||  ec2.eu-west-2.amazonaws.com      |  eu-west-2       ||
+||  ec2.eu-west-1.amazonaws.com      |  eu-west-1       ||
+||  ec2.ap-northeast-2.amazonaws.com |  ap-northeast-2  ||
+||  ec2.ap-northeast-1.amazonaws.com |  ap-northeast-1  ||
+||  ec2.sa-east-1.amazonaws.com      |  sa-east-1       ||
+||  ec2.ca-central-1.amazonaws.com   |  ca-central-1    ||
+||  ec2.ap-southeast-1.amazonaws.com |  ap-southeast-1  ||
+||  ec2.ap-southeast-2.amazonaws.com |  ap-southeast-2  ||
+||  ec2.eu-central-1.amazonaws.com   |  eu-central-1    ||
+||  ec2.us-east-1.amazonaws.com      |  us-east-1       ||
+||  ec2.us-east-2.amazonaws.com      |  us-east-2       ||
+||  ec2.us-west-1.amazonaws.com      |  us-west-1       ||
+||  ec2.us-west-2.amazonaws.com      |  us-west-2       ||
+|+-----------------------------------+------------------+|
+[root@ip-172-31-70-25 ~]# aws ec2 describe-regions --output text
+REGIONS ec2.ap-south-1.amazonaws.com    ap-south-1
+REGIONS ec2.eu-west-2.amazonaws.com     eu-west-2
+REGIONS ec2.eu-west-1.amazonaws.com     eu-west-1
+REGIONS ec2.ap-northeast-2.amazonaws.com        ap-northeast-2
+REGIONS ec2.ap-northeast-1.amazonaws.com        ap-northeast-1
+REGIONS ec2.sa-east-1.amazonaws.com     sa-east-1
+REGIONS ec2.ca-central-1.amazonaws.com  ca-central-1
+REGIONS ec2.ap-southeast-1.amazonaws.com        ap-southeast-1
+REGIONS ec2.ap-southeast-2.amazonaws.com        ap-southeast-2
+REGIONS ec2.eu-central-1.amazonaws.com  eu-central-1
+REGIONS ec2.us-east-1.amazonaws.com     us-east-1
+REGIONS ec2.us-east-2.amazonaws.com     us-east-2
+REGIONS ec2.us-west-1.amazonaws.com     us-west-1
+REGIONS ec2.us-west-2.amazonaws.com     us-west-2
+[root@ip-172-31-70-25 ~]# aws ec2 describe-availability-zones --regions ap-south                                                                                        east-1  --output text
+usage: aws [options] <command> <subcommand> [<subcommand> ...] [parameters]
+To see help text, you can run:
+
+  aws help
+  aws <command> help
+  aws <command> <subcommand> help
+
+Unknown options: --regions, ap-southeast-1
+[root@ip-172-31-70-25 ~]# aws ec2 describe-availability-zones --region ap-southe                                                                                        ast-1  --output table
+------------------------------------------------------
+|              DescribeAvailabilityZones             |
++----------------------------------------------------+
+||                 AvailabilityZones                ||
+|+----------------+-------------+-------------------+|
+||   RegionName   |    State    |     ZoneName      ||
+|+----------------+-------------+-------------------+|
+||  ap-southeast-1|  available  |  ap-southeast-1a  ||
+|+----------------+-------------+-------------------+|
+||                 AvailabilityZones                ||
+|+----------------+-------------+-------------------+|
+||   RegionName   |    State    |     ZoneName      ||
+|+----------------+-------------+-------------------+|
+||  ap-southeast-1|  available  |  ap-southeast-1b  ||
+|+----------------+-------------+-------------------+|

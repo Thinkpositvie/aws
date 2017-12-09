@@ -1,0 +1,719 @@
+awscli:
+======
+
+aws cli is unified tool to manage aws services
+
+
+advan:
+
+automate
+
+configure 
+
+easy  to manage and use
+
+pre-requisites:
+
+os machine
+
+python 
+
+pip
+
+install awc cli package :
+========================
+
+first create access and secrets key at perticular user
+
+
+click on username ---> click on credentials ---> click on continue security credentials ----> click on access key --> click on create new access key --> click on downlaod key 
+
+step 1: now we install the cli package on machine
+
+
+yum install -y cli
+
+
+step 2: now we configure aws
+
+aws configure:
+
+AWS Access Key ID [None]:************
+
+AWS Secret Access Key [None]: ********* 
+
+Default region name [None]: us-east-1
+
+Default output format [None]: json
+
+step 3: now we check the aws region information
+
+
+>>> aws ec2 describe-regions --output table
+
+
+>>> aws ec2 describe-regions --output text
+
+
+
+step 4: now we check the availability-zone information at perticualr region information
+
+
+
+>>>>>> aws ec2 describe-availability-zones --region ap-southeast-1 --output table
+
+step 5: we collect the ami and type of information and security group and key-pair
+
+
+
+select instace type and id:
+
+AMI id: ami-55ef662f
+
+instance type: t2.micro
+
+key
+
+subnet id:
+
+security group id: sg-b65ef1c7
+
+
+history:
+
+ 33  aws configure
+   34  aws ec2 describe-regions
+   35  aws ec2 describe-regions --output table
+   36  aws ec2 describe-regions --output text
+   37  aws ec2 describe-availability-zones --regions ap-southeast-1  --output text
+   38  aws ec2 describe-availability-zones --region ap-southeast-1  --output table
+   39  aws ec2 describe-images --image-id ami-55ef662f
+   40  aws ec2 describe-images --image-id ami-55ef662f --output table
+
+
+======================================================================================
+
+										date 04/12/17
+sudo -i
+
+
+uname -a
+
+
+nslookup aws.com
+
+
+yum install -y python 
+
+yum install git -y
+
+yum install pip
+
+pip install awscli
+
+aws --version
+
+aws configure
+
+
+AWS access key id: 
+
+AWS secret access key :
+
+Default region name :
+
+output format :
+
+
+AWS Access Key ID     [None]: 
+AWS Secret Access Key [None]: 
+Default region name   [None]: 
+Default output format [None]: 
+
+
+ aws ec2 describe-regions ---> To check the regions 
+
+[root@ip-172-31-78-23 ~]# aws ec2 describe-regions --output text
+REGIONS ec2.ap-south-1.amazonaws.com    ap-south-1
+REGIONS ec2.eu-west-2.amazonaws.com     eu-west-2
+REGIONS ec2.eu-west-1.amazonaws.com     eu-west-1
+REGIONS ec2.ap-northeast-2.amazonaws.com        ap-northeast-2
+REGIONS ec2.ap-northeast-1.amazonaws.com        ap-northeast-1
+REGIONS ec2.sa-east-1.amazonaws.com     sa-east-1
+REGIONS ec2.ca-central-1.amazonaws.com  ca-central-1
+REGIONS ec2.ap-southeast-1.amazonaws.com        ap-southeast-1
+REGIONS ec2.ap-southeast-2.amazonaws.com        ap-southeast-2
+REGIONS ec2.eu-central-1.amazonaws.com  eu-central-1
+REGIONS ec2.us-east-1.amazonaws.com     us-east-1
+REGIONS ec2.us-east-2.amazonaws.com     us-east-2
+REGIONS ec2.us-west-1.amazonaws.com     us-west-1
+REGIONS ec2.us-west-2.amazonaws.com     us-west-2
+[root@ip-172-31-78-23 ~]# aws ec2 describe-regions --output table
+----------------------------------------------------------
+|                     DescribeRegions                    |
++--------------------------------------------------------+
+||                        Regions                       ||
+|+-----------------------------------+------------------+|
+||             Endpoint              |   RegionName     ||
+|+-----------------------------------+------------------+|
+||  ec2.ap-south-1.amazonaws.com     |  ap-south-1      ||
+||  ec2.eu-west-2.amazonaws.com      |  eu-west-2       ||
+||  ec2.eu-west-1.amazonaws.com      |  eu-west-1       ||
+||  ec2.ap-northeast-2.amazonaws.com |  ap-northeast-2  ||
+||  ec2.ap-northeast-1.amazonaws.com |  ap-northeast-1  ||
+||  ec2.sa-east-1.amazonaws.com      |  sa-east-1       ||
+||  ec2.ca-central-1.amazonaws.com   |  ca-central-1    ||
+||  ec2.ap-southeast-1.amazonaws.com |  ap-southeast-1  ||
+||  ec2.ap-southeast-2.amazonaws.com |  ap-southeast-2  ||
+||  ec2.eu-central-1.amazonaws.com   |  eu-central-1    ||
+||  ec2.us-east-1.amazonaws.com      |  us-east-1       ||
+||  ec2.us-east-2.amazonaws.com      |  us-east-2       ||
+||  ec2.us-west-1.amazonaws.com      |  us-west-1       ||
+||  ec2.us-west-2.amazonaws.com      |  us-west-2       ||
+|+-----------------------------------+------------------+|
+
+
+
+
+==================================================================================================================
+
+ec2 instance create trough cli:
+ 
+step 1: region az health check for region and az(availability-zones )
+
+
+error: 1
+
+
+ aws ec2 describe-availability-zones ap-southeast-1
+usage: aws [options] <command> <subcommand> [<subcommand> ...] [parameters]
+To see help text, you can run:
+
+  aws help
+  aws <command> help
+  aws <command> <subcommand> help
+
+output:
+
+[root@ip-172-31-78-23 ~]# aws ec2 describe-availability-zones --region ap-southeast-1
+{
+    "AvailabilityZones": [
+        {
+            "State": "available",
+            "ZoneName": "ap-southeast-1a",
+            "Messages": [],
+            "RegionName": "ap-southeast-1"
+        },
+        {
+            "State": "available",
+            "ZoneName": "ap-southeast-1b",
+            "Messages": [],
+            "RegionName": "ap-southeast-1"
+        }
+    ]
+}
+[root@ip-172-31-78-23 ~]# aws ec2 describe-availability-zones --region ap-southeast-1 --output table
+------------------------------------------------------
+|              DescribeAvailabilityZones             |
++----------------------------------------------------+
+||                 AvailabilityZones                ||
+|+----------------+-------------+-------------------+|
+||   RegionName   |    State    |     ZoneName      ||
+|+----------------+-------------+-------------------+|
+||  ap-southeast-1|  available  |  ap-southeast-1a  ||
+|+----------------+-------------+-------------------+|
+||                 AvailabilityZones                ||
+|+----------------+-------------+-------------------+|
+||   RegionName   |    State    |     ZoneName      ||
+|+----------------+-------------+-------------------+|
+||  ap-southeast-1|  available  |  ap-southeast-1b  ||
+|+----------------+-------------+-------------------+|
+[root@ip-172-31-78-23 ~]# aws ec2 describe-availability-zones --region ap-southeast-1 --output text
+AVAILABILITYZONES       ap-southeast-1  available       ap-southeast-1a
+AVAILABILITYZONES       ap-southeast-1  available       ap-southeast-1b
+
+
+----------------------------------------------------------------------------------------------------------------------------
+
+
+ step 2:
+
+ami id         : ami-55ef662f
+
+instance type  : t2.micro
+
+keyname        : shell
+
+subnetid       : subnet-94de60b8 
+
+securitygroupid: sg-b65ef1c7
+
+
+command for ec2 instace creation:
+
+
+syntax:
+
+aws ec2 run-instances --image-d << >>  --count << no of sercvers >> --instance-type <<  >> --key-name << >> --subnet-id << >> --security-group-id << >>
+
+Real time scenario:
+===================
+
+
+To launch aws ec2 instance by using aws cli:
+===========================================
+
+
+aws ec2 run-instances --image-id ami-55ef662f --count 1 --instance-type t2.micro --key-name shell --subnet-id subnet-94de60b8 --security-group-id sg-b65ef1c7
+
+
+
+
+new instance id: i-06d96ccfb07246839
+
+
+====================================================================================================================================================================================
+output:
+=======
+[root@ip-172-31-78-23 ~]# aws ec2 describe-images
+
+^C
+[root@ip-172-31-78-23 ~]# aws ec2 describe-images --image-id ami-55ef662f
+{
+    "Images": [
+        {
+            "VirtualizationType": "hvm",
+            "Description": "Amazon Linux AMI 2017.09.1.20171120 x86_64 HVM GP2",                                                                                        
+            "Hypervisor": "xen",
+            "ImageOwnerAlias": "amazon",
+            "EnaSupport": true,
+            "SriovNetSupport": "simple",
+            "ImageId": "ami-55ef662f",
+            "State": "available",
+            "BlockDeviceMappings": [
+                {
+                    "DeviceName": "/dev/xvda",
+                    "Ebs": {
+                        "Encrypted": false,
+                        "DeleteOnTermination": true,
+                        "VolumeType": "gp2",
+                        "VolumeSize": 8,
+                        "SnapshotId": "snap-055cf1cfc1dda99fe"
+                    }
+                }
+            ],
+            "Architecture": "x86_64",
+            "ImageLocation": "amazon/amzn-ami-hvm-2017.09.1.20171120-x86_64-gp2"                                                                                        ,
+            "RootDeviceType": "ebs",
+            "OwnerId": "137112412989",
+            "RootDeviceName": "/dev/xvda",
+            "CreationDate": "2017-11-20T22:29:51.000Z",
+            "Public": true,
+            "ImageType": "machine",
+            "Name": "amzn-ami-hvm-2017.09.1.20171120-x86_64-gp2"
+        }
+    ]
+}
+[root@ip-172-31-78-23 ~]# aws ec2 describe-images --image-id ami-55ef662f --output text
+IMAGES  x86_64  2017-11-20T22:29:51.000Z        Amazon Linux AMI 2017.09.1.20171120 x86_64 HVM GP2      True    xen     ami-55ef662f    amazon/amzn-ami-hvm-2017.09.1.20171120-x86_64-gp2       amazon  machine amzn-ami-hvm-2017.09.1.20171120-x86_64-gp2      137112412989    True    /dev/xvda       ebs     simple  available       hvm
+BLOCKDEVICEMAPPINGS     /dev/xvda
+EBS     True    False   snap-055cf1cfc1dda99fe  8       gp2
+[root@ip-172-31-78-23 ~]# aws ec2 describe-images --image-id ami-55ef662f --output table
+--------------------------------------------------------------------------------
+|                                DescribeImages                                |
++------------------------------------------------------------------------------+
+||                                   Images                                   ||
+|+---------------------+------------------------------------------------------+|
+||  Architecture       |  x86_64                                              ||
+||  CreationDate       |  2017-11-20T22:29:51.000Z                            ||
+||  Description        |  Amazon Linux AMI 2017.09.1.20171120 x86_64 HVM GP2  ||
+||  EnaSupport         |  True                                                ||
+||  Hypervisor         |  xen                                                 ||
+||  ImageId            |  ami-55ef662f                                        ||
+||  ImageLocation      |  amazon/amzn-ami-hvm-2017.09.1.20171120-x86_64-gp2   ||
+||  ImageOwnerAlias    |  amazon                                              ||
+||  ImageType          |  machine                                             ||
+||  Name               |  amzn-ami-hvm-2017.09.1.20171120-x86_64-gp2          ||
+||  OwnerId            |  137112412989                                        ||
+||  Public             |  True                                                ||
+||  RootDeviceName     |  /dev/xvda                                           ||
+||  RootDeviceType     |  ebs                                                 ||
+||  SriovNetSupport    |  simple                                              ||
+||  State              |  available                                           ||
+||  VirtualizationType |  hvm                                                 ||
+|+---------------------+------------------------------------------------------+|
+|||                            BlockDeviceMappings                           |||
+||+-------------------------------------+------------------------------------+||
+|||  DeviceName                         |  /dev/xvda                         |||
+||+-------------------------------------+------------------------------------+||
+||||                                   Ebs                                  ||||
+|||+---------------------------------+--------------------------------------+|||
+||||  DeleteOnTermination            |  True                                ||||
+||||  Encrypted                      |  False                               ||||
+||||  SnapshotId                     |  snap-055cf1cfc1dda99fe              ||||
+||||  VolumeSize                     |  8                                   ||||
+||||  VolumeType                     |  gp2                                 ||||
+|||+---------------------------------+--------------------------------------+|||
+
+
+
+
+[root@ip-172-31-78-23 ~]# aws ec2 describe-security-groups
+{
+    "SecurityGroups": [
+        {
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "PrefixListIds": [],
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "UserIdGroupPairs": [],
+                    "Ipv6Ranges": []
+                }
+            ],
+            "Description": "launch-wizard-5 created 2017-12-04T09:31:15.609+05:3                                                                                        0",
+            "IpPermissions": [
+                {
+                    "PrefixListIds": [],
+                    "FromPort": 22,
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "ToPort": 22,
+                    "IpProtocol": "tcp",
+                    "UserIdGroupPairs": [],
+                    "Ipv6Ranges": []
+                }
+            ],
+            "GroupName": "launch-wizard-5",
+            "VpcId": "vpc-56c7792f",
+            "OwnerId": "234927826583",
+            "GroupId": "sg-6adab11f"
+        },
+        {
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "PrefixListIds": [],
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "UserIdGroupPairs": [],
+                    "Ipv6Ranges": []
+                }
+            ],
+            "Description": "default VPC security group",
+            "Tags": [
+                {
+                    "Value": "",
+                    "Key": "Name"
+                }
+            ],
+            "IpPermissions": [
+                {
+                    "PrefixListIds": [],
+                    "FromPort": 80,
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "ToPort": 80,
+                    "IpProtocol": "tcp",
+                    "UserIdGroupPairs": [],
+                    "Ipv6Ranges": [
+                        {
+                            "CidrIpv6": "::/0"
+                        }
+                    ]
+                },
+                {
+                    "PrefixListIds": [],
+                    "FromPort": 8080,
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "ToPort": 8080,
+                    "IpProtocol": "tcp",
+                    "UserIdGroupPairs": [],
+                    "Ipv6Ranges": [
+                        {
+                            "CidrIpv6": "::/0"
+                        }
+                    ]
+                },
+                {
+                    "PrefixListIds": [],
+                    "FromPort": 22,
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "ToPort": 22,
+                    "IpProtocol": "tcp",
+                    "UserIdGroupPairs": [],
+                    "Ipv6Ranges": [
+                        {
+                            "CidrIpv6": "::/0"
+                        }
+                    ]
+                },
+                {
+                    "PrefixListIds": [],
+                    "FromPort": 443,
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "ToPort": 443,
+                    "IpProtocol": "tcp",
+                    "UserIdGroupPairs": [],
+                    "Ipv6Ranges": []
+                }
+            ],
+            "GroupName": "default",
+            "VpcId": "vpc-56c7792f",
+            "OwnerId": "234927826583",
+            "GroupId": "sg-b65ef1c7"
+        }
+    ]
+}
+[root@ip-172-31-78-23 ~]# aws ec2 describe-security-groups --output table
+----------------------------------------------------------------------------
+|                          DescribeSecurityGroups                          |
++--------------------------------------------------------------------------+
+||                             SecurityGroups                             ||
+|+-------------+----------------------------------------------------------+|
+||  Description|  launch-wizard-5 created 2017-12-04T09:31:15.609+05:30   ||
+||  GroupId    |  sg-6adab11f                                             ||
+||  GroupName  |  launch-wizard-5                                         ||
+||  OwnerId    |  234927826583                                            ||
+||  VpcId      |  vpc-56c7792f                                            ||
+|+-------------+----------------------------------------------------------+|
+|||                             IpPermissions                            |||
+||+----------------------------------------------+-----------------------+||
+|||  FromPort                                    |  22                   |||
+|||  IpProtocol                                  |  tcp                  |||
+|||  ToPort                                      |  22                   |||
+||+----------------------------------------------+-----------------------+||
+||||                              IpRanges                              ||||
+|||+----------------------------+---------------------------------------+|||
+||||  CidrIp                    |  0.0.0.0/0                            ||||
+|||+----------------------------+---------------------------------------+|||
+|||                          IpPermissionsEgress                         |||
+||+------------------------------------------------+---------------------+||
+|||  IpProtocol                                    |  -1                 |||
+||+------------------------------------------------+---------------------+||
+||||                              IpRanges                              ||||
+|||+----------------------------+---------------------------------------+|||
+||||  CidrIp                    |  0.0.0.0/0                            ||||
+|||+----------------------------+---------------------------------------+|||
+||                             SecurityGroups                             ||
+|+-----------------------+------------------------------------------------+|
+||  Description          |  default VPC security group                    ||
+||  GroupId              |  sg-b65ef1c7                                   ||
+||  GroupName            |  default                                       ||
+||  OwnerId              |  234927826583                                  ||
+||  VpcId                |  vpc-56c7792f                                  ||
+|+-----------------------+------------------------------------------------+|
+|||                             IpPermissions                            |||
+||+----------------------------------------------+-----------------------+||
+|||  FromPort                                    |  80                   |||
+|||  IpProtocol                                  |  tcp                  |||
+|||  ToPort                                      |  80                   |||
+||+----------------------------------------------+-----------------------+||
+||||                              IpRanges                              ||||
+|||+----------------------------+---------------------------------------+|||
+||||  CidrIp                    |  0.0.0.0/0                            ||||
+|||+----------------------------+---------------------------------------+|||
+||||                             Ipv6Ranges                             ||||
+|||+----------------------------------------+---------------------------+|||
+||||  CidrIpv6                              |  ::/0                     ||||
+|||+----------------------------------------+---------------------------+|||
+|||                             IpPermissions                            |||
+||+--------------------------------------------+-------------------------+||
+|||  FromPort                                  |  8080                   |||
+|||  IpProtocol                                |  tcp                    |||
+|||  ToPort                                    |  8080                   |||
+||+--------------------------------------------+-------------------------+||
+||||                              IpRanges                              ||||
+|||+----------------------------+---------------------------------------+|||
+||||  CidrIp                    |  0.0.0.0/0                            ||||
+|||+----------------------------+---------------------------------------+|||
+||||                             Ipv6Ranges                             ||||
+|||+----------------------------------------+---------------------------+|||
+||||  CidrIpv6                              |  ::/0                     ||||
+|||+----------------------------------------+---------------------------+|||
+|||                             IpPermissions                            |||
+||+----------------------------------------------+-----------------------+||
+|||  FromPort                                    |  22                   |||
+|||  IpProtocol                                  |  tcp                  |||
+|||  ToPort                                      |  22                   |||
+||+----------------------------------------------+-----------------------+||
+||||                              IpRanges                              ||||
+|||+----------------------------+---------------------------------------+|||
+||||  CidrIp                    |  0.0.0.0/0                            ||||
+|||+----------------------------+---------------------------------------+|||
+||||                             Ipv6Ranges                             ||||
+|||+----------------------------------------+---------------------------+|||
+||||  CidrIpv6                              |  ::/0                     ||||
+|||+----------------------------------------+---------------------------+|||
+|||                             IpPermissions                            |||
+||+----------------------------------------------+-----------------------+||
+|||  FromPort                                    |  443                  |||
+|||  IpProtocol                                  |  tcp                  |||
+|||  ToPort                                      |  443                  |||
+||+----------------------------------------------+-----------------------+||
+||||                              IpRanges                              ||||
+|||+----------------------------+---------------------------------------+|||
+||||  CidrIp                    |  0.0.0.0/0                            ||||
+|||+----------------------------+---------------------------------------+|||
+|||                          IpPermissionsEgress                         |||
+||+------------------------------------------------+---------------------+||
+|||  IpProtocol                                    |  -1                 |||
+||+------------------------------------------------+---------------------+||
+||||                              IpRanges                              ||||
+|||+----------------------------+---------------------------------------+|||
+||||  CidrIp                    |  0.0.0.0/0                            ||||
+|||+----------------------------+---------------------------------------+|||
+|||                                 Tags                                 |||
+||+------------------------------------+---------------------------------+||
+|||  Key                               |  Name                           |||
+|||  Value                             |                                 |||
+||+------------------------------------+---------------------------------+||
+
+
+
+[root@ip-172-31-78-23 ~]# aws ec2 describe-instances --instance-id i-06d96ccfb07246839  --output text
+
+
+RESERVATIONS    234927826583    r-0bf91eb48aa406f1a
+INSTANCES       0       x86_64          False   True    xen     ami-55ef662f    i-06d96ccfb07246839     t2.micro        shell   2017-12-04T04:49:04.000Z        ip-172-31-78-127.ec2.internal   172.31.78.127   ec2-52-90-196-54.compute-1.amazonaws.com        52.90.196.54    /dev/xvda       ebs     True            subnet-94de60b8 hvm    vpc-56c7792f
+BLOCKDEVICEMAPPINGS     /dev/xvda
+EBS     2017-12-04T04:49:04.000Z        True    attached        vol-04eb596c821742e47
+MONITORING      disabled
+NETWORKINTERFACES               12:5f:5b:95:b8:e4       eni-39bf3bb6    234927826583    ip-172-31-78-127.ec2.internal   172.31.78.127   True    in-use  subnet-94de60b8vpc-56c7792f
+ASSOCIATION     amazon  ec2-52-90-196-54.compute-1.amazonaws.com        52.90.196.54
+ATTACHMENT      2017-12-04T04:49:04.000Z        eni-attach-756073bd     True    0       attached
+GROUPS  sg-b65ef1c7     default
+PRIVATEIPADDRESSES      True    ip-172-31-78-127.ec2.internal   172.31.78.127
+ASSOCIATION     amazon  ec2-52-90-196-54.compute-1.amazonaws.com        52.90.196.54
+PLACEMENT       us-east-1b              default
+SECURITYGROUPS  sg-b65ef1c7     default
+STATE   16      running
+[root@ip-172-31-78-23 ~]# aws ec2 describe-instances --instance-id i-06d96ccfb07246839  --output text | grep status
+[root@ip-172-31-78-23 ~]# aws ec2 describe-instances --instance-id i-06d96ccfb07246839  --output text | grep state
+[root@ip-172-31-78-23 ~]# aws ec2 describe-instances --instance-id i-06d96ccfb07246839  --output text | grep -i state
+STATE   16      running
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+AWS CLI SECURITY GROUP:
+======================
+
+create security group  in aws byusing aws cli
+
+syntax:
+======
+
+aws ec2 create-sercurity-group --group-name << >> --description  <<  >>
+
+
+
+example:
+
+aws ec2 create-security-group --group-name my-own --description "my own security "
+
+
+--------------------------------------------------------------------------------------
+
+
+aws ec2 describe-security-groups  --group-id << security group id >>  --output table
+
+
+aws ec2 describe-security-groups --output text
+
+
+aws ec2 describe-security-groups  --output table
+
+
+
+To CREATE A PORT THROUGH CLI:
+
+============================
+
+now we create ingress and outgress rules by using bellow command;
+
+
+SYNTAX:
+======
+
+aws ec2 authorize-security-group-insgress --group-name << name of the security group >> --protocol << no of the portocol >> --port << port number >> --cidr << define acess range >>
+
+
+expample:
+
+aws ec2 authorize-security-group-ingress --group-name [ positive ] --protocol [ tcp ] --port [ 8080 ]  --cidr [0.0.0.0/0]  --->  << To create a inboud and outbound rule's for perticular security group >> 
+
+
+
+aws ec2  authorize-security-group-ingress --group-name positive --protocol tcp --port 8080 --cidr 0.0.0.0/0
+
+ 
+aws ec2 describe-security-groups --group-name positive --output table  ---> now we see the security group information in the form of table
+
+
+aws ec2  describe-security-groups --group-name positive |grep  8080 --> To see perticular port
+ 
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DELETE SECURITY GROUP:
+=====================
+
+Deleting Your Security Group
+
+To delete a security group, use the delete-security-group command. Note that you can't delete a security group if it is attached to an environment.
+
+EC2-VPC
+
+The following command deletes the security group with the ID sg-903004f8:
+
+$ aws ec2 delete-security-group --group-id sg-903004f8
+
+EC2-Classic
+
+The following command deletes the security group named my-sg:
+
+$ aws ec2 delete-security-group --group-name my-sg
+
+
+
+example:
+=======
+
+ aws ec2 delete-security-group --group-name << sg name >>  ----> To delete a security group ec2-classic
+
+ aws ec2 delete-security-group --group-name << sg-id>>     ----> To delete a security group  vpc
+
+
+example:
+=======
+ 
+ aws ec2 delete-security-group --group-name my-own
+
+

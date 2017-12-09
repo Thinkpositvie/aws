@@ -1,0 +1,19 @@
+aws own AMI Creation: 
+
+ aws configure
+    2  ls
+    3  yum install httpd -y
+    4  service httpd start
+    5  aws ec2 describe-instance | grep -i i-
+    6  aws ec2 describe-instance-status | grep -i i-
+    7  aws ec2 create-image --instance-id i-020d3e08224f8ba96 --name "aws-httpd" --description "for httpd application"
+    8  history
+how to delete ami in aws
+
+
+In the navigation bar, verify your region.
+In the navigation panel, click AMIs.
+Select the AMI, click Actions, and then click Deregister. When prompted for confirmation, click Continue.
+In the navigation pane, click Snapshots.
+Select the snapshot, click Actions, and then click Delete.
+
